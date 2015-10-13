@@ -8,7 +8,7 @@ variable "aws_secret_key" {
 
 variable "region" {
   description = "The AWS region to create resources in."
-  default = "eu-west-1"
+  default = "us-east-1"
 }
 
 variable "ecs_cluster_name" {
@@ -18,7 +18,7 @@ variable "ecs_cluster_name" {
 
 variable "s3_bucket_name" {
   description = "The name of the s3 bucket to store the registry data in."
-  default = "s3-ecs-docker-registry.example.com"
+  default = "s3-ecs-docker-registry"
 }
 
 variable "registry_username" {
@@ -37,8 +37,9 @@ variable "amis" {
     ap-northeast-1 = "ami-8aa61c8a"
     ap-southeast-2 = "ami-5ddc9f67"
     eu-west-1      = "ami-2aaef35d"
-    us-east-1      = "ami-b540eade"
-    us-west-1      = "ami-5721df13"
+    # us-east-1      = "ami-b540eade"
+    us-east-1      = "ami-c16422a4"
+    us-west-1      = "ami-615cb725"
     us-west-2      = "ami-cb584dfb"
   }
 }

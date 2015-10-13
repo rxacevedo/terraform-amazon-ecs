@@ -44,5 +44,5 @@ resource "aws_iam_role_policy" "ecs_instance_role_policy" {
 resource "aws_iam_instance_profile" "ecs" {
   name = "ecs-instance-profile"
   path = "/"
-  roles = ["${aws_iam_role.ecs_role.name}"]
+  roles = ["${aws_iam_role.ecs_role.id}"]
 }

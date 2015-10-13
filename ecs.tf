@@ -13,9 +13,8 @@ resource "aws_launch_configuration" "ecs" {
   /* @todo - split out to a variable */
   instance_type        = "${var.instance_type}"
   key_name             = "${aws_key_pair.ecs.key_name}"
-  iam_instance_profile = "${aws_iam_instance_profile.ecs.id}"
   security_groups      = ["${aws_security_group.ecs.id}"]
-  iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.id}"
   user_data            = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.default.name} > /etc/ecs/ecs.config"
 }
 
@@ -25,12 +24,14 @@ resource "aws_launch_configuration" "ecs" {
 resource "aws_autoscaling_group" "ecs" {
   name                 = "ecs-asg"
   /* @todo - split out to a variable */
-  availability_zones   = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  availability_zones   = ["us-east-1b"]
   launch_configuration = "${aws_launch_configuration.ecs.name}"
   /* @todo - variablize */
   min_size             = 1
   max_size             = 10
   desired_capacity     = 1
+  # So that I can use a VPC rule
+  vpc_zone_identifier = ["subnet-913b16ba"]
 }
 
 /* ecs service cluster */
