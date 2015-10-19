@@ -11,6 +11,21 @@ variable "region" {
   default = "us-east-1"
 }
 
+variable "availability_zone" {
+  description = "The AWS availability zones to create resources in."
+  default = "us-east-1b"
+}
+
+variable "vpc_cidr" {
+  description = "CIDR for VPC"
+  default     = "10.128.0.0/16"
+}
+
+variable "public_subnet_cidr" {
+  description = "CIDR for public subnet"
+  default     = "10.128.0.0/24"
+}
+
 variable "ecs_cluster_name" {
   description = "The name of the Amazon ECS cluster."
   default = "default"
@@ -18,7 +33,7 @@ variable "ecs_cluster_name" {
 
 variable "s3_bucket_name" {
   description = "The name of the s3 bucket to store the registry data in."
-  default = "s3-ecs-docker-registry"
+  default = "rxacevedo-s3-docker-registry"
 }
 
 variable "registry_username" {
@@ -37,15 +52,14 @@ variable "amis" {
     ap-northeast-1 = "ami-8aa61c8a"
     ap-southeast-2 = "ami-5ddc9f67"
     eu-west-1      = "ami-2aaef35d"
-    # us-east-1      = "ami-b540eade"
-    us-east-1      = "ami-c16422a4"
-    us-west-1      = "ami-615cb725"
-    us-west-2      = "ami-cb584dfb"
+    us-east-1      = "ami-5943023c"
+    us-west-1      = "ami-bdc006f9"
+    us-west-2      = "ami-c0b257f3"
   }
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "key_name" {

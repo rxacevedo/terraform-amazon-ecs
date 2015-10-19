@@ -24,14 +24,13 @@ resource "aws_launch_configuration" "ecs" {
 resource "aws_autoscaling_group" "ecs" {
   name                 = "ecs-asg"
   /* @todo - split out to a variable */
-  availability_zones   = ["us-east-1b"]
+  availability_zones   = ["${var.availability_zone}"]
   launch_configuration = "${aws_launch_configuration.ecs.name}"
   /* @todo - variablize */
   min_size             = 1
   max_size             = 10
   desired_capacity     = 1
-  # So that I can use a VPC rule
-  vpc_zone_identifier = ["subnet-913b16ba"]
+  vpc_zone_identifier  = ["${aws_subnet.public.id}"]
 }
 
 /* ecs service cluster */

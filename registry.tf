@@ -11,7 +11,8 @@ resource "aws_s3_bucket" "registry" {
 resource "aws_elb" "s3-registry-elb" {
   name               = "s3-registry-elb"
   /* @todo - split out to a variable */
-  availability_zones = ["us-east-1b"]
+  subnets            = ["${aws_subnet.public.id}"]
+  security_groups    = ["${aws_security_group.ecs.id}"]
 
   listener {
     instance_port     = 5000
@@ -33,7 +34,7 @@ resource "aws_elb" "s3-registry-elb" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:5000/"
+    target              = "HTTP:5000/v2/"
     interval            = 30
   }
 
